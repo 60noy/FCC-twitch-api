@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import Menu from './Screens/Menu';
+import Main from './Components/Main';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 
 class App extends Component {
   render() {
+    injectTapEventPlugin();
     return (
-      <div>
-        <Menu/>
-      </div>
+      <MuiThemeProvider>
+        <Main/>
+      </MuiThemeProvider>
     );
   }
 }

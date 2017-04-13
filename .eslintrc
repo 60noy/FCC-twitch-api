@@ -1,0 +1,45 @@
+{
+
+  "parserOptions": {
+        "ecmaVersion": 7,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true,
+        }
+    },
+
+  "ecmaFeatures": {
+    "binaryLiterals": false,
+    "blockBindings": false,
+    "defaultParams": false,
+    "forOf": false,
+    "generators": false,
+    "objectLiteralComputedProperties": false,
+    "objectLiteralDuplicateProperties": false,
+    "objectLiteralShorthandMethods": false,
+    "objectLiteralShorthandProperties": false,
+    "octalLiterals": false,
+    "regexUFlag": false,
+    "regexYFlag": false,
+    "templateStrings": false,
+    "unicodeCodePointEscapes": false,
+    "jsx": false,
+    "no-undefined": false,
+    "no-unused-vars": 1
+
+  },
+
+  "env": {
+    "browser": false,
+    "node": false,
+    "amd": false,
+    "mocha": false,
+    "jasmine": false,
+    "phantomjs": false,
+    "jquery": false,
+    "prototypejs": false,
+    "shelljs": false,
+  },
+  "rules": {
+    }
+}

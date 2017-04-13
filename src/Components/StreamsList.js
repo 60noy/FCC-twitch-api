@@ -1,17 +1,22 @@
-import React, {PropTypes} from 'react';
-import propTypes from 'prop-types';
-export const StreamsList = (props) => {
+import React from 'react';
+import {List} from 'material-ui/List';
+import StreamItem from './StreamItem';
+const StreamsList = (props) => {
   return (
     <div>
-      {this.props.data.map((streamer) =>
+    <List>
+      {props.data.map((streamer) => (
         <StreamItem
           online={streamer.online}
           name={streamer.name}
-      />
+          primaryText={streamer.name}
+          hoverColor={streamer.online ? 'blue' : 'red'}
+          avatar={streamer.avatar}
+      />)
       )}
-  </div>
+  </List>
+</div>
 );
 }
 
-StreamsList.propTypes = {
-};
+export default StreamsList
