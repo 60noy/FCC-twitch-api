@@ -1,22 +1,25 @@
 import React from 'react';
 import {List} from 'material-ui/List';
 import StreamItem from './StreamItem';
+import PropTypes from 'prop-types';
 const StreamsList = (props) => {
   return (
-    <div>
     <List>
       {props.data.map((streamer) => (
         <StreamItem
-          online={streamer.online}
           name={streamer.name}
-          primaryText={streamer.name}
+          status={streamer.status}
           hoverColor={streamer.online ? 'blue' : 'red'}
-          avatar={streamer.avatar}
+          avatar={streamer.logo}
+          url={streamer.url}
       />)
       )}
   </List>
-</div>
 );
 }
 
 export default StreamsList
+
+StreamsList.PropTypes ={
+  data: PropTypes.array.isRequired,
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import StreamsList from './StreamsList';
+import Streams from '../Container/Streams';
 import DropDown from './DropDown';
 import propTypes from 'prop-types';
 import {List,ListItem} from 'material-ui/List';
@@ -7,9 +8,12 @@ export default class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      data: [{online:false,name:'dsadas'},{online:true,name:'dada'},{online:false,name:'gdaas'}],
       mode: 'all'
     }
+  }
+
+  componentDidMount(){
+
   }
 
   // handles click of the item list
@@ -29,7 +33,7 @@ export default class Main extends React.Component {
           mode={this.state.mode}
           onModeChange={this.handleModeChange}
         />
-        <StreamsList data={this.state.data}/>
+        <Streams mode={this.state.mode}/>
     </div>
 
   );
