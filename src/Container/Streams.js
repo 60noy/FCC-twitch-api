@@ -1,156 +1,96 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import StreamsList from '../Components/StreamsList';
+import update from 'react-addons-update';
+const streamersArr = ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "habathcx", "RobotCaleb", "noobs2ninjas"]
 export default class Streams extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      data: [
-  {
-    "stream": {
-      "mature": false,
-      "status": "Greg working on Electron-Vue boilerplate w/ Akira #programming #vuejs #electron",
-      "broadcaster_language": "en",
-      "display_name": "FreeCodeCamp",
-      "game": "Creative",
-      "language": "en",
-      "_id": 79776140,
-      "name": "freecodecamp",
-      "created_at": "2015-01-14T03:36:47Z",
-      "updated_at": "2016-09-17T05:00:52Z",
-      "delay": null,
-      "logo": "https://static-cdn.jtvnw.net/jtv_user_pictures/freecodecamp-profile_image-d9514f2df0962329-300x300.png",
-      "banner": null,
-      "video_banner": "https://static-cdn.jtvnw.net/jtv_user_pictures/freecodecamp-channel_offline_image-b8e133c78cd51cb0-1920x1080.png",
-      "background": null,
-      "profile_banner": "https://static-cdn.jtvnw.net/jtv_user_pictures/freecodecamp-profile_banner-6f5e3445ff474aec-480.png",
-      "profile_banner_background_color": null,
-      "partner": false,
-      "url": "https://www.twitch.tv/freecodecamp",
-      "views": 161989,
-      "followers": 10048,
-      "_links": {
-        "self": "https://api.twitch.tv/kraken/channels/freecodecamp",
-        "follows": "https://api.twitch.tv/kraken/channels/freecodecamp/follows",
-        "commercial": "https://api.twitch.tv/kraken/channels/freecodecamp/commercial",
-        "stream_key": "https://api.twitch.tv/kraken/channels/freecodecamp/stream_key",
-        "chat": "https://api.twitch.tv/kraken/chat/freecodecamp",
-        "subscriptions": "https://api.twitch.tv/kraken/channels/freecodecamp/subscriptions",
-        "editors": "https://api.twitch.tv/kraken/channels/freecodecamp/editors",
-        "teams": "https://api.twitch.tv/kraken/channels/freecodecamp/teams",
-        "videos": "https://api.twitch.tv/kraken/channels/freecodecamp/videos"
-      }
-    },
-    "_links": {
-      "self": "https://api.twitch.tv/kraken/streams/freecodecamp",
-      "channel": "https://api.twitch.tv/kraken/channels/freecodecamp"
-    }
-  },
-  {
-    "stream": null,
-    "display_name": "OgamingSC2",
-    "_links": {
-      "self": "https://api.twitch.tv/kraken/streams/ogamingsc2",
-      "channel": "https://api.twitch.tv/kraken/channels/ogamingsc2"
-    }
-  },
-  {
-    "stream": {
-      "mature": false,
-      "status": "RERUN: StarCraft 2 - Kane vs. HuK (ZvP) - WCS Season 3 Challenger AM - Match 4",
-      "broadcaster_language": "en",
-      "display_name": "ESL_SC2",
-      "game": "StarCraft II",
-      "language": "en",
-      "_id": 30220059,
-      "name": "esl_sc2",
-      "created_at": "2012-05-02T09:59:20Z",
-      "updated_at": "2016-09-17T06:02:57Z",
-      "delay": null,
-      "logo": "https://static-cdn.jtvnw.net/jtv_user_pictures/esl_sc2-profile_image-d6db9488cec97125-300x300.jpeg",
-      "banner": null,
-      "video_banner": "https://static-cdn.jtvnw.net/jtv_user_pictures/esl_sc2-channel_offline_image-5a8657f8393c9d85-1920x1080.jpeg",
-      "background": null,
-      "profile_banner": "https://static-cdn.jtvnw.net/jtv_user_pictures/esl_sc2-profile_banner-f8295b33d1846e75-480.jpeg",
-      "profile_banner_background_color": "#050506",
-      "partner": true,
-      "url": "https://www.twitch.tv/esl_sc2",
-      "views": 60843789,
-      "followers": 135275,
-      "_links": {
-        "self": "https://api.twitch.tv/kraken/channels/esl_sc2",
-        "follows": "https://api.twitch.tv/kraken/channels/esl_sc2/follows",
-        "commercial": "https://api.twitch.tv/kraken/channels/esl_sc2/commercial",
-        "stream_key": "https://api.twitch.tv/kraken/channels/esl_sc2/stream_key",
-        "chat": "https://api.twitch.tv/kraken/chat/esl_sc2",
-        "subscriptions": "https://api.twitch.tv/kraken/channels/esl_sc2/subscriptions",
-        "editors": "https://api.twitch.tv/kraken/channels/esl_sc2/editors",
-        "teams": "https://api.twitch.tv/kraken/channels/esl_sc2/teams",
-        "videos": "https://api.twitch.tv/kraken/channels/esl_sc2/videos"
-      }
-    },
-    "_links": {
-      "self": "https://api.twitch.tv/kraken/streams/esl_sc2",
-      "channel": "https://api.twitch.tv/kraken/channels/esl_sc2"
-    }
-  },
-  {
-    "stream": null,
-    "display_name": "noobs2ninjas",
-    "_links": {
-      "self": "https://api.twitch.tv/kraken/streams/esl_sc2",
-      "channel": "https://api.twitch.tv/kraken/channels/esl_sc2"
-    }
-  },
-  {
-    "error": "Not Found",
-    "status": 404,
-    "message": "Channel 'not-a-valid-account' does not exist"
-  }
-],
-      mode: this.props.mode
+      data: [],
+  mode: this.props.mode,
+  filteredData: [],
+  input: this.props.input
     }
   }
 
-  componentDidMount(){
-    // return fetch('https://api.twitch.tv/kraken/channels/FreeCodeCamp', {headers: {'Client-ID':'yf4fens5312i2ryaz76duqvge5tsoz'}})
-    // .then((response) => response.json())
-    // .then((data) => console.log((data)))
-    let data = this.state.data
-    data.map((user) => this.makeUserObject(user))
-    this.setState({data})
+  componentWillMount(){
+
+}
+  // sets the state data and filteredData to the fetched data
+  getData = () => {
+    let data = Promise.all(this.usersToStreamData(streamersArr))
+    .then((value) => this.setState({data:value,filteredData:value}))
   }
-
-  componentWillReceiveProps(nextProps){
-
+  usersToStreamData = (arr) =>{
+    return arr.map((item) => this.usernameToStreamData(item))
   }
-
-  makeUserObject = (user) => {
-    let link = user.links.channel
-    let userData = this.getUserData(link)
-    return ({online: user.stream !== null,
-      name: userData.display_name,
-      status: userData.status,
-      logo: userData.logo,
-      url: userData.url
+  // gets username and returns parsed user object
+  usernameToStreamData = (user) => {
+    return fetch(`https://api.twitch.tv/kraken/streams/${user}`, {headers: {'Client-ID':'yf4fens5312i2ryaz76duqvge5tsoz'}} )
+    .then((res) => res.json())
+    .then((value) => {
+      return this.streamDataToStreamObject(value)
     })
   }
-
-  getUserData = (userLink) =>{
-    return fetch(userLink, {header: {'Client_ID':'yf4fens5312i2ryaz76duqvge5tsoz'}})
-    .then((response) => response.json())
-    .then((data) => data)
+  // gets stream data and returns parsed object
+  streamDataToStreamObject= (user) =>{
+    return this.getUserPromise(user).then(res => {
+      return {name: res.display_name,
+        status: res.status,
+        logo: res.logo,
+        url: res.url,
+        online: user.stream !== null
+      }}
+    )
   }
 
-  render() {
-    return (
-    <div>
-        <StreamsList data={this.state.data}/>
-    </div>
-  );
+  // gets a promise with channel data
+  getUserPromise = (user) =>{
+    let link = user._links.channel
+    return fetch(link, {headers: {'Client-ID':'yf4fens5312i2ryaz76duqvge5tsoz'}})
+    .then((response) => response.json())
+  }
+
+  componentWillReceiveProps = (newProps)=>{
+    let filteredData = this.state.filteredData
+    let data = this.state.data
+    if (this.props.mode !== newProps.mode) {
+    let mode = newProps.mode
+    this.setState({mode})
+      // filters users according to the mode
+    filteredData = data.filter((user) =>
+      this.handleUserByMode(user,mode)
+    )
+    this.setState({filteredData})
+  }
+  else if(this.props.input !== newProps.input){
+    let input = newProps.input
+    filteredData = data.filter((user) => {
+      return user.name.toUpperCase().match(input.toUpperCase())
+    })
+    this.setState({input,filteredData:filteredData})
   }
 }
 
+  // gets user and returns true or false according to the mode
+  handleUserByMode = (user,mode) => {
+    if (mode === 'online')
+      return user.online
+    else if(mode === 'offline')
+      return (!user.online)
+    return true
+  }
+
+  render() {
+    this.state.data.length === 0 && this.getData()
+    return (
+        <StreamsList
+          data={this.state.filteredData}
+        />
+  );
+  }
+}
 Streams.PropTypes = {
   mode: PropTypes.string.isRequired,
 };

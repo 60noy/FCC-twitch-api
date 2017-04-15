@@ -2,13 +2,16 @@ import React from 'react';
 import StreamsList from './StreamsList';
 import Streams from '../Container/Streams';
 import DropDown from './DropDown';
-import propTypes from 'prop-types';
 import {List,ListItem} from 'material-ui/List';
+import {TextField} from 'material-ui';
+
+import './Main.css';
 export default class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      mode: 'all'
+      mode: 'all',
+      input: ''
     }
   }
 
@@ -26,19 +29,33 @@ export default class Main extends React.Component {
     this.setState({mode: value})
   }
 
+  handleInputChange =(e,input) =>{
+    this.setState({input})
+  }
+
   render() {
     return (
-      <div style={{flex:1, justifyContent:'center',alignItems:'center',marginLeft:'20%',marginRight:'20%'}}>
-        <DropDown
+      <div className="container">
+        <div className="title">
+          Twitch API Viewer
+        </div>
+        <div style={{display:'flex',flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+          <TextField
+            onChange={this.handleInputChange}
+            hintText='Search for a stream'
+            value={this.state.input}
+          />
+          <DropDown
+            mode={this.state.mode}
+            onModeChange={this.handleModeChange}
+          />
+        </div>
+        <Streams
           mode={this.state.mode}
-          onModeChange={this.handleModeChange}
+          input={this.state.input}
         />
-        <Streams mode={this.state.mode}/>
     </div>
 
   );
   }
 }
-
-Main.propTypes = {
-};

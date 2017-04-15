@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {ListItem} from 'material-ui/List';
-import Avatar from 'material-ui/Avatar';
- const StreamItem = (props) => {
-  return (
+import {ListItem,Avatar} from 'material-ui';
+
+ const StreamItem = (props) =>
     <ListItem
       primaryText={props.name}
       secondaryText={props.status}
@@ -13,8 +12,7 @@ import Avatar from 'material-ui/Avatar';
       hoverColor={props.hoverColor}
       onClick={ () => window.location = props.url}
   />
-  );
-}
+
 
 StreamItem.PropTypes={
   name: PropTypes.string.isRequired,
