@@ -15,10 +15,6 @@ export default class Main extends React.Component {
     }
   }
 
-  componentDidMount(){
-
-  }
-
   // handles click of the item list
   handleItemClick = (streamer,index) => {
     alert(streamer.name)
@@ -44,6 +40,7 @@ export default class Main extends React.Component {
             onChange={this.handleInputChange}
             hintText='Search for a stream'
             value={this.state.input}
+            underlineFocusStyle={{borderColor:'#000'}}
           />
           <DropDown
             mode={this.state.mode}

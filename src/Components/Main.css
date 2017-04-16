@@ -3,10 +3,10 @@
   font-size: 3.2vw;
   text-align: center;
   font-weight: 300;
+  font-family: 'Roboto', sans-serif;
 }
 .container{
   flex:1;
   padding-left: 20%;
   padding-right: 20%;
-  
 }

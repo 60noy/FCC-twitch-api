@@ -8,7 +8,6 @@ export default class Streams extends React.Component {
     super(props);
     this.state={
       data: [],
-  mode: this.props.mode,
   filteredData: [],
   input: this.props.input
     }
@@ -52,25 +51,21 @@ export default class Streams extends React.Component {
     .then((response) => response.json())
   }
 
+  // filters the data by mode and input
   componentWillReceiveProps = (newProps)=>{
     let filteredData = this.state.filteredData
     let data = this.state.data
-    if (this.props.mode !== newProps.mode) {
-    let mode = newProps.mode
-    this.setState({mode})
-      // filters users according to the mode
+    let input = newProps.input
+    let mode
+    // sets the mode to the changed one
+    if (newProps.mode !== this.props.mode)
+      mode = newProps.mode
+    else
+      mode = this.props.mode
     filteredData = data.filter((user) =>
-      this.handleUserByMode(user,mode)
+      this.handleUserByMode(user,mode) && this.handleUserByInput(user,input)
     )
     this.setState({filteredData})
-  }
-  else if(this.props.input !== newProps.input){
-    let input = newProps.input
-    filteredData = data.filter((user) => {
-      return user.name.toUpperCase().match(input.toUpperCase())
-    })
-    this.setState({input,filteredData:filteredData})
-  }
 }
 
   // gets user and returns true or false according to the mode
@@ -80,6 +75,10 @@ export default class Streams extends React.Component {
     else if(mode === 'offline')
       return (!user.online)
     return true
+  }
+
+  handleUserByInput = (user,input)=>{
+    return user.name.toLowerCase().match(input.toLowerCase())
   }
 
   render() {
